@@ -1,0 +1,30 @@
+{
+  "name": "generate-image-mcp-server",
+  "version": "0.1.0",
+  "description": "通用 OpenAI 兼容图片生成 MCP server，通过环境变量配置后端",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "generate-image-mcp-server": "dist/index.js"
+  },
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc && esbuild src/index.ts --bundle --platform=node --format=esm --target=node18 --external:sharp --outfile=../../plugin/mcp/generate-image/index.mjs",
+    "clean": "rm -rf dist ../../plugin/mcp"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.6.1",
+    "sharp": "^0.35.3",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "esbuild": "^0.25.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

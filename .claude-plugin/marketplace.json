@@ -1,0 +1,14 @@
+{
+  "owner": { "name": "jesonliu" },
+  "name": "content-producer",
+  "description": "content-producer 插件的本地 marketplace：复刻爆款内容、生成配图并半自动发布。",
+  "plugins": [
+    {
+      "name": "content-producer",
+      "source": "./plugin",
+      "description": "像素级复刻公众号/小红书爆款，结合当前项目产品生成图文并发布的内容生产插件（主skill编排 + 多sub-agent + MCP）。",
+      "version": "0.1.4",
+      "author": { "name": "jesonliu" }
+    }
+  ]
+}

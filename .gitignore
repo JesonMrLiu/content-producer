@@ -1,0 +1,4 @@
+mcpserver/generate-image/dist
+mcpserver/generate-image/node_modules
+mcpserver/publish/dist
+mcpserver/publish/node_modules
