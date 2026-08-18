@@ -21,7 +21,7 @@
 ## 目录结构
 
 ```
-generate-image/
+content-producer/
 ├── .claude-plugin/
 │   └── marketplace.json   # 本地 marketplace 清单
 ├── mcpserver/      # MCP server 源码（generate-image、publish）
@@ -44,7 +44,3 @@ generate-image/
 ```
 /produce <目标链接> [内容描述] [--product 产品名] [--platform wechat|xhs]
 ```
-
-## 设计文档
-
-完整架构与实现计划见 `~/.claude/plans/claudecode-sub-agent-mcpserver-plugin-m-optimized-owl.md`。
