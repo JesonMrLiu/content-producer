@@ -1,14 +1,29 @@
 {
   "name": "content-producer",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "description": "像素级复刻公众号/小红书爆款，结合当前项目产品生成图文并发布的内容生产插件（主skill编排 + 多sub-agent + MCP）。",
   "author": {
     "name": "jesonliu",
     "url": "https://github.com/jesonliu/content-producer"
   },
   "license": "MIT",
-  "keywords": ["content", "wechat", "xiaohongshu", "replicate", "publish", "image-generation"],
+  "keywords": ["content", "wechat", "xiaohongshu", "replicate", "publish", "image-generation", "image-recognition"],
   "mcpServers": {
+    "image-recognition": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@jesonliu/image-recognition-mcp"],
+      "env": {
+        "IMAGE_RECOGNITION_API_KEY": "${IMAGE_RECOGNITION_API_KEY}",
+        "IMAGE_RECOGNITION_BASE_URL": "${IMAGE_RECOGNITION_BASE_URL}",
+        "IMAGE_RECOGNITION_MODEL": "${IMAGE_RECOGNITION_MODEL}",
+        "IMAGE_RECOGNITION_DETAIL": "${IMAGE_RECOGNITION_DETAIL:-high}",
+        "IMAGE_RECOGNITION_MAX_TOKENS": "${IMAGE_RECOGNITION_MAX_TOKENS:-2048}",
+        "IMAGE_RECOGNITION_TIMEOUT_MS": "${IMAGE_RECOGNITION_TIMEOUT_MS:-60000}",
+        "IMAGE_RECOGNITION_DOWNLOAD_URL": "${IMAGE_RECOGNITION_DOWNLOAD_URL:-0}",
+        "IMAGE_RECOGNITION_MAX_FILE_MB": "${IMAGE_RECOGNITION_MAX_FILE_MB:-15}"
+      }
+    },
     "generate-image": {
       "type": "stdio",
       "command": "node",

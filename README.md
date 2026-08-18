@@ -13,6 +13,7 @@
   - `assemble-content` — 校验/回填图片路径到正文
   - `publish` — 发布：公众号 API 自动上传素材并创建草稿，小红书 playwright 浏览器自动预填；「发表/发布」由用户人工点击，失败回退半自动打包
 - **MCP**：
+  - `image-recognition`（内置识图：`@jesonliu/image-recognition-mcp`，fetch-content 拆解目标配图 + generate-images 质检共用）
   - `generate-image`（自带，Node+TS，通用可配置后端）
   - `publish`（自带，Node+TS，公众号素材上传 + 图文草稿创建）
   - `playwright`（反爬登录兜底 + 小红书发布预填）

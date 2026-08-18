@@ -28,7 +28,10 @@ model: sonnet
 
 ## 工作流程 B：xhs（浏览器自动预填 + 人工点发布）
 
-1. **先本地打包**（与半自动流程一致）：生成小红书笔记文案（含 emoji、话题标签，纯文本，不用 markdown 语法），写入 `outputDir/publish.md`（或 `publish.txt`）与 `outputDir/images-manifest.md`。
+1. **先本地打包**（与半自动流程一致）：从 article.md 生成小红书笔记文案，写入 `outputDir/publish.md`（或 `publish.txt`）与 `outputDir/images-manifest.md`。**小红书图文相互独立——正文与图片是两个部分**：
+   - 打包时**剔除全部图片占位符 `![…](images/…)` 及其图注文字**，产出纯笔记文案（emoji + 换行 + 话题标签，纯文本，不用 markdown 语法）；
+   - 打包后自查三条：① 正文无 `![` / `images/` / 图注残留；② 无 markdown 标题、加粗等语法残留（结尾 `#话题` 标签除外）；③ 正文 ≤ 1000 字（超出则精简后重新自查）；
+   - 图片不进正文，仅经下方上传区域单独传入。
 2. **浏览器预填**（使用 `mcp__plugin_content-producer_playwright__*` 系列工具）：
    - `browser_navigate` 打开 `https://creator.xiaohongshu.com/publish/publish`；
    - 若被带到登录页：**明确提醒用户去浏览器扫码登录**，用 `browser_wait_for` 等待登录完成（约 3 分钟仍未登录 → 停下报告，不要死等死循环）；
