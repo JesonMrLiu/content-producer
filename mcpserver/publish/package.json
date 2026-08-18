@@ -1,11 +1,17 @@
 {
-  "name": "publish-mcp-server",
+  "name": "@jesonliu/publish-mcp-server",
   "version": "0.1.0",
   "description": "内容发布 MCP server（微信公众号：素材上传 + 图文草稿创建，发表由人工完成）",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
     "publish-mcp-server": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "start": "node dist/index.js",

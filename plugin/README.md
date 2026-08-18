@@ -12,36 +12,18 @@
 
 ## 安装
 
-### 第一步：构建 MCP server
-
-两个自带 server 均由 `plugin.json` 以 `${CLAUDE_PLUGIN_ROOT}/../mcpserver/<name>/dist/index.js` 引用。**以本地 marketplace（目录源）方式安装时安装位置即本仓库，构建出 dist 即可用**；若你的安装方式会把 `plugin/` 复制走（cache 场景），需自行调整路径：
-
-```bash
-cd mcpserver/generate-image
-npm install --registry=https://registry.npmmirror.com
-npm run build # tsc → dist/
-
-cd ../publish
-npm install --registry=https://registry.npmmirror.com
-npm run build # tsc → dist/
-```
-
-### 第二步：通过 marketplace 安装
-
-在 Claude Code 中执行（`<仓库根目录>` 即本仓库的绝对路径）：
+两个自研 MCP server（`generate-image`、`publish`）已发布为 npm 包（`@jesonliu/generate-image-mcp-server`、`@jesonliu/publish-mcp-server`），经 `npx` 按需拉取，**无需本地构建**。在 Claude Code 中执行：
 
 ```
-/plugin marketplace add <仓库根目录>
-/plugin install content-producer@content-producer-marketplace
+/plugin marketplace add JesonMrLiu/content-producer
+/plugin install content-producer@content-producer
 ```
 
-> 安装会把 `plugin/` 复制到 `~/.claude/plugins/cache`。之后修改插件文件需执行 `claude plugin update content-producer@content-producer-marketplace` 同步。
+> 安装会把 `plugin/` 复制到 `~/.claude/plugins/cache`。之后修改插件文件需执行 `claude plugin update content-producer@content-producer` 同步。
 
 ### 本地开发调试（可选）
 
 不安装、直接从原目录加载：`claude --plugin-dir ./plugin`
-
-> ⚠️ **发布计划**：后续把 `generate-image` server 发布为 npm 包后，`plugin.json` 中该条目改为 `"command":"npx","args":["-y","@jesonliu/generate-image-mcp-server"]`（与 playwright 同形式），并可移除 `mcp/` 打包产物与 esbuild 构建步骤。
 
 ## 配置：图片生成后端
 
@@ -61,9 +43,7 @@ npm run build # tsc → dist/
 
 1. mp.weixin.qq.com → 设置与开发 → 基本配置，获取 **AppID / AppSecret**（Secret 需启用开发者密码）；
 2. 同页把**本机出口 IP 加入 IP 白名单**（否则建草稿报 40164）；
-3. 配置凭证（二选一）：
-   - 系统环境变量 `WECHAT_APP_ID` / `WECHAT_APP_SECRET`；
-   - 直接填入 `plugin/.claude-plugin/plugin.json` 中 `mcpServers.publish.env` 的两个值。
+3. 配置系统环境变量 `WECHAT_APP_ID` / `WECHAT_APP_SECRET`（Windows 可用 `setx`，配置后重启终端/Claude Code 生效）。
 
 配置后可让 Claude 调 `wechat_check_config` 验证。小红书无需配置，首次发布时在弹出的浏览器里**扫码登录一次**即可（playwright 持久化登录态）。
 

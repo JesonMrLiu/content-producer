@@ -1,10 +1,10 @@
 {
   "name": "content-producer",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "像素级复刻公众号/小红书爆款，结合当前项目产品生成图文并发布的内容生产插件（主skill编排 + 多sub-agent + MCP）。",
   "author": {
     "name": "jesonliu",
-    "url": "https://github.com/jesonliu/content-producer"
+    "url": "https://github.com/JesonMrLiu/content-producer"
   },
   "license": "MIT",
   "keywords": ["content", "wechat", "xiaohongshu", "replicate", "publish", "image-generation", "image-recognition"],
@@ -26,12 +26,12 @@
     },
     "generate-image": {
       "type": "stdio",
-      "command": "node",
-      "args": ["${CLAUDE_PLUGIN_ROOT}/../mcpserver/generate-image/dist/index.js"],
+      "command": "npx",
+      "args": ["-y", "@jesonliu/generate-image-mcp-server"],
       "env": {
-        "IMAGE_GEN_API_KEY": "4c0020d5b11549dfa6ba57480b3a6dbd.3GXfqSWSMWBCBzOC",
-        "IMAGE_GEN_BASE_URL": "${IMAGE_GEN_BASE_URL:-https://open.bigmodel.cn/api/paas/v4}",
-        "IMAGE_GEN_MODEL": "${IMAGE_GEN_MODEL:-glm-image}",
+        "IMAGE_GEN_API_KEY": "${IMAGE_GEN_API_KEY}",
+        "IMAGE_GEN_BASE_URL": "${IMAGE_GEN_BASE_URL}",
+        "IMAGE_GEN_MODEL": "${IMAGE_GEN_MODEL}",
         "IMAGE_GEN_SIZE": "${IMAGE_GEN_SIZE:-1024x1024}",
         "IMAGE_GEN_TIMEOUT_MS": "${IMAGE_GEN_TIMEOUT_MS:-120000}",
         "IMAGE_GEN_WATERMARK_PARAM": "${IMAGE_GEN_WATERMARK_PARAM:-watermark_enabled}"
@@ -39,11 +39,11 @@
     },
     "publish": {
       "type": "stdio",
-      "command": "node",
-      "args": ["${CLAUDE_PLUGIN_ROOT}/../mcpserver/publish/dist/index.js"],
+      "command": "npx",
+      "args": ["-y", "@jesonliu/publish-mcp-server"],
       "env": {
-        "WECHAT_APP_ID": "${WECHAT_APP_ID:-wx2fc04032184af0bd}",
-        "WECHAT_APP_SECRET": "${WECHAT_APP_SECRET:-fe43da6f790660e3d204e750d22681c6}"
+        "WECHAT_APP_ID": "${WECHAT_APP_ID}",
+        "WECHAT_APP_SECRET": "${WECHAT_APP_SECRET}"
       }
     },
     "playwright": {
