@@ -19,12 +19,87 @@
 
 凭证可在系统环境变量设置，或直接填在 `plugin/.claude-plugin/plugin.json` 的 `mcpServers.publish.env`。缺失时工具返回中文配置指引（server 不退出），publish agent 自动回退半自动打包。
 
+### 跨平台配置方式
+
+#### Windows
+
+**方式一：永久环境变量（推荐）**
+```cmd
+setx WECHAT_APP_ID "your-app-id"
+setx WECHAT_APP_SECRET "your-app-secret"
+```
+配置后需**重启终端/Claude Code** 使其生效。
+
+**方式二：当前窗口生效（重启后失效）**
+```cmd
+set WECHAT_APP_ID=your-app-id
+set WECHAT_APP_SECRET=your-app-secret
+```
+
+#### macOS / Linux
+
+**方式一：写入配置文件（推荐）**
+```bash
+# 编辑 ~/.bashrc 或 ~/.zshrc
+export WECHAT_APP_ID="your-app-id"
+export WECHAT_APP_SECRET="your-app-secret"
+
+# 使配置生效
+source ~/.bashrc   # 或 source ~/.zshrc
+```
+
+### 备选方案：直接在 settings.json 中配置
+
+若系统环境变量配置未生效，可将配置直接写入 Claude Code 的 `settings.json`：
+
+在 `~/.claude/settings.json`（用户级）或 `项目/.claude/settings.json`（项目级）中添加：
+
+```json
+{
+  "env": {
+    "WECHAT_APP_ID": "your-app-id",
+    "WECHAT_APP_SECRET": "your-app-secret"
+  }
+}
+```
+
+> `settings.json` 中的 `env` 字段优先级高于系统环境变量，会注入到所有 MCP server 进程。凭证缺失时工具返回中文配置指引（server 不退出）。
+
 ## 构建
 
 ```bash
 npm install --registry=https://registry.npmmirror.com
 npm run build   # tsc → dist/
 ```
+
+## MCP 配置（独立使用）
+
+本包已发布至 npmjs，可单独安装使用：
+
+```bash
+npm install @jesonliu/publish-mcp-server
+```
+
+在 Claude Code 的 `plugin.json` 或 `.mcp.json` 中配置：
+
+```json
+{
+  "mcpServers": {
+    "publish": {
+      "command": "npx",
+      "args": ["-y", "@jesonliu/publish-mcp-server"],
+      "env": {
+        "WECHAT_APP_ID": "${WECHAT_APP_ID}",
+        "WECHAT_APP_SECRET": "${WECHAT_APP_SECRET}"
+      }
+    }
+  }
+}
+```
+
+> `WECHAT_APP_ID` 与 `WECHAT_APP_SECRET` 均为必需。
+
+npmjs 链接：https://www.npmjs.com/package/@jesonliu/publish-mcp-server
 
 ## 与审核闸的配合
 

@@ -18,6 +18,60 @@
   - `publish`（自带，Node+TS，公众号素材上传 + 图文草稿创建）
   - `playwright`（反爬登录兜底 + 小红书发布预填）
 
+## MCP 配置
+
+两个自研 MCP server 均已发布至 npmjs，可独立安装使用：
+
+> **环境变量配置**：Windows 用 `setx`（永久）或 `set`（当前窗口）；macOS/Linux 用 `export` 写入 `~/.bashrc`/`~/.zshrc`。环境变量未生效时，可直接在 `~/.claude/settings.json` 的 `env` 字段中配置（优先级更高）。详见各 MCP server 目录下的 README.md。
+
+### generate-image
+
+```bash
+npm install @jesonliu/generate-image-mcp-server
+```
+
+```json
+{
+  "mcpServers": {
+    "generate-image": {
+      "command": "npx",
+      "args": ["-y", "@jesonliu/generate-image-mcp-server"],
+      "env": {
+        "IMAGE_GEN_API_KEY": "${IMAGE_GEN_API_KEY}",
+        "IMAGE_GEN_BASE_URL": "${IMAGE_GEN_BASE_URL:-https://api.openai.com/v1}",
+        "IMAGE_GEN_MODEL": "${IMAGE_GEN_MODEL:-dall-e-3}",
+        "IMAGE_GEN_SIZE": "${IMAGE_GEN_SIZE:-1024x1024}",
+        "IMAGE_GEN_TIMEOUT_MS": "${IMAGE_GEN_TIMEOUT_MS:-120000}",
+        "IMAGE_GEN_WATERMARK_PARAM": "${IMAGE_GEN_WATERMARK_PARAM:-watermark_enabled}"
+      }
+    }
+  }
+}
+```
+
+### publish
+
+```bash
+npm install @jesonliu/publish-mcp-server
+```
+
+```json
+{
+  "mcpServers": {
+    "publish": {
+      "command": "npx",
+      "args": ["-y", "@jesonliu/publish-mcp-server"],
+      "env": {
+        "WECHAT_APP_ID": "${WECHAT_APP_ID}",
+        "WECHAT_APP_SECRET": "${WECHAT_APP_SECRET}"
+      }
+    }
+  }
+}
+```
+
+详见各 MCP server 目录下的 README.md。
+
 ## 目录结构
 
 ```
