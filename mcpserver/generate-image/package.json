@@ -1,6 +1,6 @@
 {
   "name": "@jesonliu/generate-image-mcp-server",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "通用 OpenAI 兼容图片生成 MCP server，通过环境变量配置后端",
   "type": "module",
   "main": "dist/index.js",

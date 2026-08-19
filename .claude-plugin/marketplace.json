@@ -7,7 +7,7 @@
       "name": "content-producer",
       "source": "./plugin",
       "description": "像素级复刻公众号/小红书爆款，结合当前项目产品生成图文并发布的内容生产插件（主skill编排 + 多sub-agent + MCP）。",
-      "version": "0.1.7",
+      "version": "0.1.8",
       "author": { "name": "jesonliu" }
     }
   ]

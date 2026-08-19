@@ -1,6 +1,6 @@
 {
   "name": "@jesonliu/publish-mcp-server",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "内容发布 MCP server（微信公众号：素材上传 + 图文草稿创建，发表由人工完成）",
   "type": "module",
   "main": "dist/index.js",

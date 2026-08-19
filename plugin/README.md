@@ -161,8 +161,11 @@ content-output/<task-id>/
 ├── article.md           # 正文（含图片占位）
 ├── images-prompt.md     # 配图提示词
 ├── images/*.png         # 生成的配图
+├── images-trash/        # ★ 被否决/落选图片回收站（含 trash-manifest.md 清单）
 └── output/<平台>/       # 发布打包产物
 ```
+
+> **图片回收站**：质检重试、封面 N 选 1 中被否决/落选的图片不会删除，而是移入同级的 `images-trash/` 回收站，并在 `trash-manifest.md` 中记录评分与否决原因，方便你在人工审核时回看历史版本、挑选更合适的图。
 
 ## 反爬与小红书发布说明
 

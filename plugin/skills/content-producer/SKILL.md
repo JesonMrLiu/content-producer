@@ -74,4 +74,5 @@ argument-hint: "<目标链接> [内容描述] [--product 产品] [--platform wec
 ## 汇报格式（收尾）
 - task-id 与产物目录
 - 各产物路径清单
+- 若 generate-images 阶段有被否决图片：附回收站路径 `images-trash/`（含 `trash-manifest.md` 清单），提示用户可回看历史版本挑选
 - 发布状态（公众号：草稿已创建待手动发表 / 已打包待手动发布；小红书：已预填待手动发布 / 已打包待手动发布；未发布）
